@@ -28,12 +28,25 @@ RUN set -ex \
 	&& ./make.bash \
 	\
 	&& rm -rf /*.patch \
-	&& apk del .build-deps
+	&& apk del .build-deps 
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH
+
+RUN go get golang.org/x/tools/cmd/godoc                                 && \
+    go get github.com/nsf/gocode                                        && \
+    go get golang.org/x/tools/cmd/goimports                             && \
+    go get github.com/rogpeppe/godef                                    && \
+    go get golang.org/x/tools/cmd/gorename                              && \
+    go get github.com/golang/lint/golint                                && \
+    go get github.com/kisielk/errcheck                                  && \
+    go get github.com/jstemmer/gotags                                   && \
+    go get github.com/tools/godep                                       && \
+    mv /go/bin/* /usr/local/go/bin                                      && \
+    rm -rf /go/src/* /go/pkg 
+
 
 COPY go-wrapper /usr/local/bin/
