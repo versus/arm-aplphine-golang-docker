@@ -26,3 +26,17 @@ docker run -e GOOS=linux -e GOARCH=amd64 -v /tmp/crosstest:/go/bin  armhf/golang
 ```bash
 docker run -e GOOS=windows -e GOARCH=amd64 -v /tmp/crosstest:/go/bin  armhf/golang:1.7.3  sh -c "go get github.com/golang/example/hello/..."
 ```
+
+## PRECOMPILED TOOLS
+
+* godoc 
+* nsf/gocode
+* goimports
+* rogpeppe/godef
+* gorename
+* lint/golint
+* kisielk/errcheck
+* jstemmer/gotags
+* godep
+
+
